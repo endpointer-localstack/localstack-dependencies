@@ -1,0 +1,15 @@
+[build-system]
+requires = ["setuptools>=42", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "localstack-dependencies"
+version = "1.0"
+description = ''
+authors = [{name = 'endpointer', email = 'infra@endpointer.com'}]
+license = {text = 'Apache License 2.0'}
+dependencies = []
+[project.urls]
+"Homepage" = "https://endpointer.com"
+[tool.setuptools.packages.find]
+where = ["."]
