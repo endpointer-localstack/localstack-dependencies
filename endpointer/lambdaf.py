@@ -40,7 +40,7 @@ def get_lambda_token(request_parameters):
 
 def get_lambda_reference(request_parameters):
     
-    lambda_reference = request_parameters.get(LAMBDA_REFERENCE_FIELD)[0]
+    lambda_reference = request_parameters.get(LAMBDA_REFERENCE_FIELD)
 
     return lambda_reference
 

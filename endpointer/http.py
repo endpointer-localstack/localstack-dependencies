@@ -41,7 +41,17 @@ def get_request_parameters(environ):
     query_string = get_query_string(environ)
     query_params = parse_qs(query_string)
 
-    return query_params
+    single_params = {}
+
+    for k in query_params:
+
+        has_more_than_one = (len(query_params[k]) > 1)
+        if has_more_than_one:
+            single_params[k] = query_params[k]
+        else:
+            single_params[k] = query_params[k][0]
+
+    return single_params
 
 def get_query_string(environ):
 
