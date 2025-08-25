@@ -1,5 +1,6 @@
 import json
 from urllib.parse import parse_qs
+from http import HTTPStatus as http_status
 
 RESPONSE_STATUS = 'response_status'
 RESPONSE_HEADERS = 'response_headers'
@@ -70,3 +71,16 @@ def get_request_body(environ):
     request_body_json = json.loads(request_body_string)
 
     return request_body_json
+
+def prepare_response_package(response_headers, response_body):
+
+    response_body_string = json.dumps(response_body)
+
+    response_body_bytes = response_body_string.encode(UTF_8)
+
+    response_headers[CONTENT_TYPE] = APPLICATION_JSON
+    response_headers[CONTENT_LENGTH] = str(len(response_body_bytes))
+
+    response_headers_list = list(response_headers.items())
+    
+    return (response_headers_list, [response_body_bytes])
