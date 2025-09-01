@@ -8,6 +8,8 @@ RESOURCE_ALIAS_FIELD = 'resource-alias'
 ERROR_CODE_FIELD = 'error-code'
 DOCS_URL_FIELD = 'docs-url'
 
+PATCH_OP = 'op'
+
 INVALID_RESOURCE_REFERENCE = 'invalid-resource-reference'
 INVALID_RESOURCE_TOKEN = 'invalid-resource-token'
 RESOURCE_NOT_DEPLOYED = 'resource-not-deployed'
@@ -24,7 +26,7 @@ def format_datetime(date_time, format_string=FORMAT_DATETIME):
 
 def get_resource_token(request_uri):
 
-    resource_token = request_uri[1]
+    resource_token = request_uri[0]
 
     return resource_token
 

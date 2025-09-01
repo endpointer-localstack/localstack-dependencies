@@ -14,7 +14,14 @@ CLIENT_IP = 'client_ip'
 PATH_INFO = 'PATH_INFO'
 ERROR_CODE_FIELD = 'error-code'
 DOCS_URL_FIELD = 'docs-url'
-INVALID_PATH_OPERATION = 'invalid-path-operation'
+INVALID_PATH_OPERATION = 'invalid-patch-operation'
+
+FORMAT_DATETIME = '%Y-%m-%d %H:%M:%S'
+
+def format_datetime(date_time, format_string=FORMAT_DATETIME):
+
+    date_time_string = date_time.strftime(format_string)
+    return date_time_string
 
 def get_path_info(environ):
 
@@ -31,6 +38,8 @@ def get_request_uri(environ):
         return None
     
     request_uri = uri.split('/')
+
+    del request_uri[0]
    
     return request_uri
 
@@ -84,6 +93,9 @@ def get_query_string(environ):
     return query_string
 
 def get_request_body(environ):
+    
+    if not ('CONTENT_LENGTH' in environ):
+        return None
 
     content_length = int(environ['CONTENT_LENGTH'])
 
@@ -143,7 +155,7 @@ def no_content_response(response_headers):
 
     }
 
-def not_found_response(response_headers):
+def not_found_response(response_headers={}):
 
     response_body = {}
 
@@ -159,11 +171,11 @@ def bad_request_response(response_headers, error_code, docs_url):
 
     return send_error(http_status.BAD_REQUEST, response_headers, error_code, docs_url)
 
-def invalid_path_operation(response_headers, docs_url):
+def invalid_patch_operation_response(response_headers, docs_url):
 
     error_code = INVALID_PATH_OPERATION
     
-    return bad_request_response(response_headers, docs_url)
+    return bad_request_response(response_headers, error_code, docs_url)
 
 def unauthorized_response(response_headers, error_code, docs_url):
 
