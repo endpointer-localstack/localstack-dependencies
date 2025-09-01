@@ -24,7 +24,7 @@ def format_datetime(date_time, format_string=FORMAT_DATETIME):
 
 def get_resource_token(request_uri):
 
-    resource_token = request_uri[0]
+    resource_token = request_uri[1]
 
     return resource_token
 

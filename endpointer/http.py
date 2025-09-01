@@ -12,6 +12,9 @@ UTF_8 = 'utf-8'
 APPLICATION_JSON = 'application/json'
 CLIENT_IP = 'client_ip'
 PATH_INFO = 'PATH_INFO'
+ERROR_CODE_FIELD = 'error-code'
+DOCS_URL_FIELD = 'docs-url'
+INVALID_PATH_OPERATION = 'invalid-path-operation'
 
 def get_path_info(environ):
 
@@ -84,6 +87,9 @@ def get_request_body(environ):
 
     content_length = int(environ['CONTENT_LENGTH'])
 
+    if content_length == 0:
+        return None
+
     request_body = environ['wsgi.input'].read(content_length)
 
     request_body_string = request_body.decode(UTF_8)
@@ -104,3 +110,78 @@ def prepare_response_package(response_headers, response_body):
     response_headers_list = list(response_headers.items())
     
     return (response_headers_list, [response_body_bytes])
+
+def ok_response(response_headers, response_body):
+
+    return {
+
+        RESPONSE_STATUS: http_status.OK,
+        RESPONSE_HEADERS: response_headers,
+        RESPONSE_BODY: response_body
+
+    }
+
+def created_response(response_headers, response_body):
+
+    return {
+
+        RESPONSE_STATUS: http_status.CREATED,
+        RESPONSE_HEADERS: response_headers,
+        RESPONSE_BODY: response_body
+
+    }
+
+def no_content_response(response_headers):
+
+    response_body = {}
+
+    return {
+
+        RESPONSE_STATUS: http_status.NO_CONTENT,
+        RESPONSE_HEADERS: response_headers,
+        RESPONSE_BODY: response_body
+
+    }
+
+def not_found_response(response_headers):
+
+    response_body = {}
+
+    return {
+
+        RESPONSE_STATUS: http_status.NOT_FOUND,
+        RESPONSE_HEADERS: response_headers,
+        RESPONSE_BODY: response_body
+
+    }
+
+def bad_request_response(response_headers, error_code, docs_url):
+
+    return send_error(http_status.BAD_REQUEST, response_headers, error_code, docs_url)
+
+def invalid_path_operation(response_headers, docs_url):
+
+    error_code = INVALID_PATH_OPERATION
+    
+    return bad_request_response(response_headers, docs_url)
+
+def unauthorized_response(response_headers, error_code, docs_url):
+
+    return send_error(http_status.UNAUTHORIZED, response_headers, error_code, docs_url)
+
+def send_error(response_status, response_headers, error_code, docs_url):
+
+    response_body = {
+
+        ERROR_CODE_FIELD:error_code,
+        DOCS_URL_FIELD:docs_url
+
+    }
+
+    return {
+
+        RESPONSE_STATUS: response_status,
+        RESPONSE_HEADERS: response_headers,
+        RESPONSE_BODY: response_body
+
+    }
