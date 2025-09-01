@@ -1,16 +1,16 @@
 import endpointer.http as ep_http
 from http import HTTPStatus as http_status
 
-LAMBDA_REFERENCE_FIELD = 'lambda-reference'
-LAMBDA_TOKEN_FIELD = 'lambda-token'
-LAMBDA_ALIAS_FIELD = 'lambda-alias'
+RESOURCE_REFERENCE_FIELD = 'resource-reference'
+RESOURCE_TOKEN_FIELD = 'resource-token'
+RESOURCE_ALIAS_FIELD = 'resource-alias'
 
 ERROR_CODE_FIELD = 'error-code'
 DOCS_URL_FIELD = 'docs-url'
 
-INVALID_LAMBDA_REFERENCE = 'invalid-lambda-reference'
-INVALID_LAMBDA_TOKEN = 'invalid-lambda-token'
-LAMBDA_NOT_DEPLOYED = 'lambda-not-deployed'
+INVALID_RESOURCE_REFERENCE = 'invalid-resource-reference'
+INVALID_RESOURCE_TOKEN = 'invalid-resource-token'
+RESOURCE_NOT_DEPLOYED = 'resource-not-deployed'
 INVALID_JSON_BODY = 'invalid-json-body'
 
 DOCS_URL = 'https://docs.endpointer.com/security-no-session'
@@ -21,6 +21,12 @@ def format_datetime(date_time, format_string=FORMAT_DATETIME):
 
     date_time_string = date_time.strftime('%Y-%m-%d %H:%M:%S')
     return date_time_string
+
+def get_resource_token(request_uri):
+
+    resource_token = request_uri[0]
+
+    return resource_token
 
 def get_api_token(request_parameters):
 
@@ -40,13 +46,13 @@ def get_lambda_token(request_parameters):
 
 def get_lambda_reference(request_parameters):
     
-    lambda_reference = request_parameters.get(LAMBDA_REFERENCE_FIELD)
+    lambda_reference = request_parameters.get(RESOURCE_REFERENCE_FIELD)
 
     return lambda_reference
 
 def has_valid_lambda_reference(request_parameters):
 
-    lambda_reference = request_parameters.get(LAMBDA_REFERENCE_FIELD)
+    lambda_reference = request_parameters.get(RESOURCE_REFERENCE_FIELD)
     not_found = lambda_reference is None
     if not_found:
         return False
@@ -55,12 +61,12 @@ def has_valid_lambda_reference(request_parameters):
 
 def has_valid_lambda_token(request_parameters):
 
-    lambda_token = request_parameters.get(LAMBDA_TOKEN_FIELD)
+    lambda_token = request_parameters.get(RESOURCE_TOKEN_FIELD)
     has_lambda_token = lambda_token is not None
     if not has_lambda_token:
         return False
     
-    # restore when lambda deployed
+    # restore when resource deployed
     # has_valid_lambda_token = ep_regexp.is_valid_token(lambda_token[0])
     # if not has_valid_lambda_token:
     #     return False
@@ -140,4 +146,4 @@ def lambda_not_found_response():
 
     response_headers = {}
 
-    return bad_request_response(response_headers, INVALID_LAMBDA_TOKEN, DOCS_URL)
+    return bad_request_response(response_headers, INVALID_RESOURCE_TOKEN, DOCS_URL)

@@ -1,6 +1,7 @@
 import json
 from urllib.parse import parse_qs
 from http import HTTPStatus as http_status
+import endpointer.regexp as ep_regexp
 
 RESPONSE_STATUS = 'response_status'
 RESPONSE_HEADERS = 'response_headers'
@@ -10,6 +11,25 @@ CONTENT_TYPE = 'Content-Type'
 UTF_8 = 'utf-8'
 APPLICATION_JSON = 'application/json'
 CLIENT_IP = 'client_ip'
+PATH_INFO = 'PATH_INFO'
+
+def get_path_info(environ):
+
+    path_info = environ.get(PATH_INFO)
+    if path_info is None:
+        return None
+    
+    return path_info
+
+def get_request_uri(environ):
+
+    uri = get_path_info(environ)
+    if uri is None:
+        return None
+    
+    request_uri = uri.split('/')
+   
+    return request_uri
 
 def get_request_verb(environ):
     

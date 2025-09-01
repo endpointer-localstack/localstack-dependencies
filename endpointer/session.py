@@ -1,6 +1,6 @@
 import endpointer.regexp as ep_regexp
 from http import HTTPStatus as http_status
-import endpointer.api as ep_lambdaf
+import endpointer.resource as ep_lambdaf
 import endpointer.http as ep_http
 
 SESSION_TOKEN_HEADER = 'com-endpointer-session-token'
