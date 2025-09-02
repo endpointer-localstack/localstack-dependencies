@@ -143,7 +143,7 @@ def created_response(response_headers, response_body):
 
     }
 
-def no_content_response(response_headers):
+def no_content_response(response_headers={}):
 
     response_body = {}
 
