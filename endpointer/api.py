@@ -26,15 +26,13 @@ def format_datetime(date_time, format_string=FORMAT_DATETIME):
 
 def get_resource_token(request_uri):
 
-    resource_token = request_uri[1]
+    resource_token = request_uri[0]
 
     return resource_token
 
-def get_api_token(request_parameters):
+def get_api_token(request_uri):
 
-    lambda_reference = get_lambda_reference(request_parameters)
-
-    api_token = lambda_reference.split('.')[0]
+    api_token = request_uri[0]
 
     return api_token
 
