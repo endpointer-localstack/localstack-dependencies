@@ -155,6 +155,18 @@ def no_content_response(response_headers={}):
 
     }
 
+def method_not_allowed_response(response_headers={}):
+
+    response_body = {}
+
+    return {
+
+        RESPONSE_STATUS: http_status.METHOD_NOT_ALLOWED,
+        RESPONSE_HEADERS: response_headers,
+        RESPONSE_BODY: response_body
+
+    }
+
 def not_found_response(response_headers={}):
 
     response_body = {}
