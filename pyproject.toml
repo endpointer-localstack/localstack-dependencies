@@ -5,11 +5,14 @@ build-backend = "setuptools.build_meta"
 [project]
 name = "localstack-dependencies"
 version = "1.0"
-description = ''
-authors = [{name = 'endpointer', email = 'contact@endpointer.com'}]
+description = 'dependencies for endpointer localstack-node'
+readme = "README.md"
+authors = [{name = 'endpointer']
 license = {text = 'Apache License 2.0'}
 dependencies = []
+
 [project.urls]
 Homepage = "https://github.com/endpointer-localstack/localstack-dependencies"
+
 [tool.setuptools.packages.find]
 where = ["."]
