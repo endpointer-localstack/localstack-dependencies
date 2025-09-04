@@ -4,10 +4,10 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "localstack-dependencies"
-version = "1.0"
+version = "1.5"
 description = 'dependencies for endpointer localstack-node'
 readme = "README.md"
-authors = [{name = 'endpointer']
+authors = [{name = 'endpointer'}]
 license = {text = 'Apache License 2.0'}
 dependencies = []
 
