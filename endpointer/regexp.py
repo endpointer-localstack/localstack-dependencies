@@ -1,5 +1,14 @@
 import re
 
+def is_valid_uri(uri):
+
+    if uri == None:
+        return False    
+
+    regex = r'^(\/[a-zA-Z0-9]{1,15})(\/[a-zA-Z0-9]{1,15})*$'
+    
+    return re.match(regex, uri) is not None
+
 def is_valid_email(email):
 
     if email == None:
