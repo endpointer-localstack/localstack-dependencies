@@ -15,6 +15,7 @@ PATH_INFO = 'PATH_INFO'
 ERROR_CODE_FIELD = 'error-code'
 DOCS_URL_FIELD = 'docs-url'
 INVALID_PATH_OPERATION = 'invalid-patch-operation'
+PATCH_OP = 'op'
 
 FORMAT_DATETIME = '%Y-%m-%d %H:%M:%S'
 
