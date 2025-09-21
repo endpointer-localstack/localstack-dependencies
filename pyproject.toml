@@ -4,7 +4,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "localstack-dependencies"
-version = "1.8"
+version = "1.9"
 description = 'dependencies for endpointer localstack-node'
 readme = "README.md"
 authors = [{name = 'endpointer'}]

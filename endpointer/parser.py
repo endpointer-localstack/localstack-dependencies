@@ -25,7 +25,8 @@ def parse(source_code: str) -> tuple:
         'operator', 'collections', 'heapq', 'array', 're', 'statistics',
         'time', 'datetime', 'enum', 'types',
         'requests',   # Added requests
-        'endpointer'  # Added custom module
+        'endpointer',  # Added custom module
+        'mysql'
     }
 
     # --- Internal blacklists ---
